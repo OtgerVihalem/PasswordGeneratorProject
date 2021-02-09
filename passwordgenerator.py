@@ -20,9 +20,9 @@ heading = Label(root, text = 'PASSWORD GENERATOR' , font ='arial 15 bold').pack(
 Label(root, text ='DataFlair', font ='arial 15 bold').pack(side = BOTTOM)
 
 
-
+pass_label_text = "Password length"
 ###select password length
-pass_label = Label(root, text = 'PASSWORD LENGTH', font = 'arial 10 bold').pack()
+pass_label = Label(root, text = pass_label_text, font = 'arial 10 bold').pack()
 pass_len = IntVar()
 length = Spinbox(root, from_ = 8, to_ = 32 , textvariable = pass_len , width = 15).pack()
 
@@ -31,6 +31,7 @@ length = Spinbox(root, from_ = 8, to_ = 32 , textvariable = pass_len , width = 1
 #####define function
 
 pass_str = StringVar()
+test1="SADSADSADSADASDASD"
 
 def Generator():
     password = ''
@@ -39,6 +40,40 @@ def Generator():
     for y in range(pass_len.get()- 4):
         password = password+random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation)
     pass_str.set(password)
+    #password length difficulty
+    x = True
+    while x:
+        if (len(password) < 6 or len(password) > 12):
+            break
+        elif not re.search("[a-z]", password):
+            break
+        elif not re.search("[0-9]", password):
+            break
+        elif not re.search("[A-Z]", password):
+            break
+        elif not re.search("[$#@]", password):
+            break
+        elif re.search("\s", password):
+            break
+        else:
+
+# re.search("[a-z]" - nõrk
+    # TestLabel['text'] = "nõrk"
+# re.search("[a-z]" and re.search("[0-9]" - keskmine
+    # TestLabel['text'] = "keskmine"
+# re.search("[a-z]" and re.search("[0-9]" and re.search("[A-Z]" - tugev
+    # TestLabel['text'] = "tugev"
+
+
+            print("Valid Password")
+
+            x = False
+            break
+
+    if x:
+
+        print("Not a Valid Password")
+
    
 
 
@@ -55,7 +90,10 @@ def Copy_password():
 
 Button(root, text = 'COPY TO CLIPBOARD', command = Copy_password).pack(pady=5)
 
+##password difficulty text box
 
+TestLabel = Label(root, text =test1, font ='arial 15 bold')
+TestLabel.pack(pady = 6)
 
 ###start of my code password length difficulty
 
