@@ -24,7 +24,7 @@ pass_label_text = "Password length"
 ###select password length
 pass_label = Label(root, text = pass_label_text, font = 'arial 10 bold').pack()
 pass_len = IntVar()
-length = Spinbox(root, from_ = 8, to_ = 32 , textvariable = pass_len , width = 15).pack()
+length = Spinbox(root, from_ = 4, to_ = 32 , textvariable = pass_len , width = 15).pack()
 
 
 
@@ -43,19 +43,23 @@ def Generator():
     #password length difficulty
     x = True
     while x:
-        if (len(password) < 6 or len(password) > 20):
+        if (len(password) < 6):
+            TestLabel['text'] = "Väga nõrk parool"
             break
-        elif not re.search("[a-z]", password):
+        if (len(password) > 20):
             TestLabel['text'] = "Nõrk parool"
             break
-        elif not re.search("[0-9]", password):
+        elif not re.search("[a-z]", password):
             TestLabel['text'] = "Keskmine parool"
             break
-        elif not re.search("[A-Z]", password):
+        elif not re.search("[0-9]", password):
             TestLabel['text'] = "Tugev parool"
             break
-        elif not re.search("[$#@]", password):
+        elif not re.search("[A-Z]", password):
             TestLabel['text'] = "Väga tugev parool"
+            break
+        elif not re.search("[$#@]", password):
+            TestLabel['text'] = "Kõige tugevaim parool"
             break
         elif re.search("\s", password):
             break
